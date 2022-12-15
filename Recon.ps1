@@ -1,14 +1,20 @@
-#Automated News reader edit $urlstrings to put in your own sources
-
 $urlString = @(
     "https://www.cisa.gov/uscert/ncas/alerts.xml",
     "https://feeds.feedburner.com/TheHackersNews",
-    "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed",
+    "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed"
     "https://www.bleepingcomputer.com/feed/",
-    "https://gbhackers.com/feed/"
+    "https://gbhackers.com/feed/",
+    'https://grahamcluley.com/feed/',
+    'https://threatpost.com/feed/',
+   'https://krebsonsecurity.com/feed/',
+   'https://www.darkreading.com/rss.xml',
+   'http://feeds.feedburner.com/eset/blog',
+   'https://www.darktrace.com/blog/index.xml',
+   'https://www.us-cert.gov/ncas/alerts.xml'
+
+  
 )
 
-# Use the .NET Framework's XmlDocument class to parse the RSS feed
 $xml = New-Object System.Xml.XmlDocument
 
 # Create an array to hold the titles of news items that have been displayed
@@ -30,7 +36,11 @@ while(1) {
             $description = $item.SelectSingleNode("description").InnerText -replace "<[^>]*>", ""
             $description = $description -replace "&nbsp;", ""
             $descriptionLines = $description -split "`n" | Select-Object -First 2
-            $pubDate = [DateTime]::Parse($item.SelectSingleNode("pubDate").InnerText)
+
+            $dateString = $item.SelectSingleNode("pubDate").InnerText
+$date = [DateTime]::Parse($dateString)
+$formattedDate = $date.ToString("yyyy-MM-ddTHH:mm:ssZ")
+$pubDate = [DateTime]::Parse($formattedDate)
             
 
             # Check if the news item's title has already been displayed
@@ -40,7 +50,7 @@ while(1) {
             }
 
             # Check if the news item's publication date is within the last 36 hours
-            if ($pubDate -gt (Get-Date).AddHours(-48)) {
+            if ($pubDate -gt (Get-Date).AddHours(-8)) {
                 Write-Host ""
                 Write-Host Title:" $title" -ForegroundColor green
                 write-host Publish date: $pubDate -ForegroundColor yellow
@@ -53,7 +63,8 @@ while(1) {
                 # Add the news item's title to the list of displayed titles
                 $displayedTitles += $title
 
-                Start-Sleep -Seconds 1
+               Start-Sleep -Seconds 6
+               clear
             }
         }
     } 
