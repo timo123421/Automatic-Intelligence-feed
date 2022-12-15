@@ -5,7 +5,10 @@ $urlString = @(
     "https://feeds.feedburner.com/TheHackersNews",
     "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed",
     "https://www.bleepingcomputer.com/feed/",
-    "https://gbhackers.com/feed/"
+    "https://gbhackers.com/feed/",
+    "https://threatpost.com/feed/",
+    "http://feeds.feedburner.com/securityweek",
+    "https://www.darkreading.com/rss.xml"
 )
 
 # Use the .NET Framework's XmlDocument class to parse the RSS feed
