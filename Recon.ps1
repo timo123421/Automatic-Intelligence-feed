@@ -1,5 +1,8 @@
+Start-Transcript -Path "C:\logs\my-script.log"
 #Automated News reader edit $urlstrings to put in your own sources
+$outputFile = "C:\output.txt"
 clear
+
 Write-Host "
 ___________.__   .__   __              __   .__                             __                   ___.                    .__          __           .__   
 \_   _____/|  |  |__|_/  |_   ____   _/  |_ |  |__ _______   ____  _____  _/  |_    ____  ___.__.\_ |__    ____ _______  |__|  ____ _/  |_   ____  |  |  
@@ -141,11 +144,13 @@ $urlString = @(
 $displayedTitles = @()
 $allItems = @()
 $totalUrls = $urlString.Length
+While(1){
+
 try {
     $progressBar = [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 } catch {}
     # suppress the error message
-Write-Host "Loading RSS feeds... please wait" -ForegroundColor Yellow
+Write-Host "Loading RSS feeds... please wait" -ForegroundColor yellow
 Write-Progress -Activity "Loading RSS feeds...please wait" -PercentComplete 0
 
 foreach ($index in 0..($totalUrls - 1)) {
@@ -217,6 +222,7 @@ foreach ($item in $allItems) {
         $counter++
 
         #edit here how quickly
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 3
     }
-}
+}}
+Stop-Transcript
