@@ -117,16 +117,6 @@ $urlString = @(
 'https://www.youtube.com/feeds/videos.xml?playlist_id=UU9Qa_gXarSmObPX3ooIQZrg',
 'https://www.reddit.com/r/netsec/.rss',
 'https://advisories.ncsc.nl/rss/advisories'
-'https://news.google.com/rss/search?q=threat+intelligence&hl=en',
-'https://news.google.com/rss/search?q=apt+advanced+persistent&hl=en',
-'https://news.google.com/rss/search?q=vulnerability+exploit&hl=en',
-'https://news.google.com/rss/search?q=poc+proof+of+concept+exploit&hl=en',
-'https://news.google.com/rss/search?q=malware+family&hl=en',
-'https://news.google.com/rss/search?q=pos+point+sale+malware&hl=en',
-'https://news.google.com/rss/search?q=ransomware&hl=en',
-'https://news.google.com/rss/search?q=wiper+malware&hl=en',
-'https://news.google.com/rss/search?q=malware+analysis&hl=en'
-'https://advisories.ncsc.nl/rss/advisories',
 'https://feeds.ncsc.nl/nieuws.rss',
 'https://research.checkpoint.com/category/threat-research/feed/',
 'https://securityintelligence.com/category/x-force/feed/',
@@ -137,8 +127,7 @@ $urlString = @(
 'https://www.securonix.com/resource-type/threat-research/feed/',
 'https://www.recordedfuture.com/category/cyber/feed/',
 'https://www.mcafee.com/blogs/tag/advanced-threat-research/feed',
-'https://blog.paloaltonetworks.com/category/threat-research/feed/',
-'https://www.kaspersky.co.in/blog/tag/threat-intelligence/feed/'
+'https://blog.paloaltonetworks.com/category/threat-research/feed/'
 )
 
 $displayedTitles = @()
