@@ -22,6 +22,7 @@ $urlString = @(
 'https://www.darktrace.com/blog/index.xml',
 'https://www.us-cert.gov/ncas/alerts.xml'
 'http://www.exploit-monday.com/feeds/posts/default',
+'http://ianduffy.ie/index.xml',
 'https://www.swordshield.com/feed/',
 'http://www.mathyvanhoef.com/feeds/posts/default',
 'http://colesec.inventedtheinternet.com/feed/',
@@ -33,6 +34,7 @@ $urlString = @(
 'http://www.thespanner.co.uk/feed/',
 'http://sysadmincasts.com/feed.rss',
 'https://www.coalfire.com/Solutions/Coalfire-Labs/The-Coalfire-LABS-Blog?rss=blogs',
+'https://d.uijn.nl/feed/',
 'https://www.optiv.com/resources/blog/feed',
 'https://ctus.io/rss/',
 'http://artsploit.blogspot.com/feeds/posts/default?alt=rss',
@@ -75,6 +77,7 @@ $urlString = @(
 'http://derflounder.wordpress.com/feed/',
 'http://www.unix-ninja.com/feed/rss/',
 'https://trustfoundry.net/feed/',
+'http://www.f-secure.com/weblog/weblog.rdf',
 'http://feeds.feedburner.com/SucuriSecurity',
 'http://enigma0x3.wordpress.com/feed/',
 'https://blog.g0tmi1k.com/atom.xml',
@@ -83,7 +86,7 @@ $urlString = @(
 'https://feeds.feedburner.com/fortinet/blogs/security-research',
 'http://isc.sans.org/rssfeed.xml',
 'http://www.bluecoat.com/security/rss',
-'http://feeds.feedburner.com/CyberArms',
+'http://feeds.feedburner.com/CyberArms'
 'https://www.grepular.com/rss',
 'http://feeds.feedburner.com/PentestTools',
 'http://websec.ca/blog_posts/index.rss',
@@ -94,6 +97,7 @@ $urlString = @(
 'https://objective-see.com/rss.xml',
 'http://x42.obscurechannel.com/?feed=rss2',
 'http://www.harmj0y.net/blog/feed/',
+'http://krebsonsecurity.com/feed/',
 'http://vrt-sourcefire.blogspot.com/feeds/posts/default',
 'http://infamoussecurity.com/?feed=rss2',
 'http://www.darkoperator.com/blog/rss.xml',
@@ -107,8 +111,20 @@ $urlString = @(
 'http://www.sensepost.com/blog/index.rss',
 'https://whitton.io/feed.xml',
 'https://sensepost.com/rss.xm',
+'https://www.youtube.com/feeds/videos.xml?playlist_id=UU9Qa_gXarSmObPX3ooIQZrg',
 'https://www.reddit.com/r/netsec/.rss',
+'https://advisories.ncsc.nl/rss/advisories'
+'https://news.google.com/rss/search?q=threat+intelligence&hl=en',
+'https://news.google.com/rss/search?q=apt+advanced+persistent&hl=en',
+'https://news.google.com/rss/search?q=vulnerability+exploit&hl=en',
+'https://news.google.com/rss/search?q=poc+proof+of+concept+exploit&hl=en',
+'https://news.google.com/rss/search?q=malware+family&hl=en',
+'https://news.google.com/rss/search?q=pos+point+sale+malware&hl=en',
+'https://news.google.com/rss/search?q=ransomware&hl=en',
+'https://news.google.com/rss/search?q=wiper+malware&hl=en',
+'https://news.google.com/rss/search?q=malware+analysis&hl=en'
 'https://advisories.ncsc.nl/rss/advisories',
+'https://feeds.ncsc.nl/nieuws.rss',
 'https://research.checkpoint.com/category/threat-research/feed/',
 'https://securityintelligence.com/category/x-force/feed/',
 'https://www.netskope.com/blog/category/netskope-threat-labs/feed',
@@ -120,9 +136,8 @@ $urlString = @(
 'https://www.mcafee.com/blogs/tag/advanced-threat-research/feed',
 'https://blog.paloaltonetworks.com/category/threat-research/feed/',
 'https://www.kaspersky.co.in/blog/tag/threat-intelligence/feed/'
-'https://www.f-secure.com/weblog/weblog.rdf'
-
 )
+
 $displayedTitles = @()
 $allItems = @()
 $totalUrls = $urlString.Length
@@ -154,7 +169,7 @@ foreach ($index in 0..($totalUrls - 1)) {
                     continue
                 }
             }
-            if ($pubDate -gt (Get-Date).AddHours(-8)) {
+            if ($pubDate -gt (Get-Date).AddHours(-12)) {
                 $allItems += [pscustomobject]@{
                     Title = $item.SelectSingleNode("title").InnerText -replace "<[^>]*>", ""
                     Link = $item.SelectSingleNode("link").InnerText -replace "<[^>]*>", ""
@@ -174,20 +189,20 @@ foreach ($index in 0..($totalUrls - 1)) {
     Write-Progress -Activity "Loading RSS feeds..." -PercentComplete $percentComplete -Status "$index/$totalUrls completed"
 }
 
-# Sort the items by their pubDate in descending order
-$allItems = $allItems | Sort-Object -Property PubDate -Descending
+# Sort the items by their pubDate in ascending order
+$allItems = $allItems | Sort-Object -Property PubDate
 
 $counter = 1
 foreach ($item in $allItems) {
     $title = $item.Title
     $link = $item.Link
     $description = $item.Description -replace "&nbsp;", ""
-    $descriptionLines = $description -split "`n" | Select-Object -First 2
+    $descriptionLines = $description -split "`n" | Select-Object -First 5
     $pubDate = $item.PubDate
     if ($displayedTitles -contains $title) {
         continue
     }
-    if ($pubDate -gt (Get-Date).AddHours(-8)) {
+    if ($pubDate -gt (Get-Date).AddHours(-12)) {
         Write-Host ""
         Write-Host "[$counter] Title: $title" -ForegroundColor Green
         Write-Host "Publish date: $pubDate" -ForegroundColor Yellow
