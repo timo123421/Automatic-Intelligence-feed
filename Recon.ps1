@@ -188,14 +188,17 @@ while (1) {
                     Write-Host "[$counter] Title: $title" -ForegroundColor Green
                     Write-Host "Publish date: $pubDate" -ForegroundColor Yellow
                     Write-Host "Description: $descriptionLines"
+                    Write-Host "`
+                    "
                     Write-Host ""
-                    Write-Host ""
-                    Write-Host "Source: $link"
+                    Write-Host "Source: $link
+                    
+                    ``"
                     $displayedTitles += $title
                     $counter++
 
                     #edit here how quickly
-                    Start-Sleep -Seconds 3
+                    Start-Sleep -Seconds 1
                 }
             }
         }
