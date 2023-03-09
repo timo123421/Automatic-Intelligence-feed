@@ -222,7 +222,9 @@ foreach ($item in $allItems) {
         $counter++
 
         #edit here how quickly
-        Start-Sleep -Seconds 3
+        Start-Sleep -Seconds 5
+        clear
     }
-}}
-Stop-Transcript
+}
+clear
+Stop-Transcript}
