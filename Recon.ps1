@@ -209,11 +209,8 @@ foreach ($item in $allItems) {
         Write-Host "[$counter] Title: $title" -ForegroundColor Green
         Write-Host "Publish date: $pubDate" -ForegroundColor Yellow
         Write-Host "Description: $descriptionLines"
-        Write-Host "`
-        "
         Write-Host ""
-        Write-Host "Source: $link
-                   
+        Write-Host "Source: $link     
         "
         $displayedTitles += $title
         $counter++
