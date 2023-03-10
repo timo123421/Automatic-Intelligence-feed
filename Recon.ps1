@@ -1,16 +1,23 @@
 Start-Transcript -Path "C:\logs\my-script.log"
-#Automated News reader edit $urlstrings to put in your own sources
-$outputFile = "C:\output.txt"
 clear
-
 Write-Host "
+
+
+
 ___________.__   .__   __              __   .__                             __                   ___.                    .__          __           .__   
 \_   _____/|  |  |__|_/  |_   ____   _/  |_ |  |__ _______   ____  _____  _/  |_    ____  ___.__.\_ |__    ____ _______  |__|  ____ _/  |_   ____  |  |  
  |    __)_ |  |  |  |\   __\_/ __ \  \   __\|  |  \\_  __ \_/ __ \ \__  \ \   __\ _/ ___\<   |  | | __ \ _/ __ \\_  __ \ |  | /    \\   __\_/ __ \ |  |  
  |        \|  |__|  | |  |  \  ___/   |  |  |   Y  \|  | \/\  ___/  / __ \_|  |   \  \___ \___  | | \_\ \\  ___/ |  | \/ |  ||   |  \|  |  \  ___/ |  |__
 /_______  /|____/|__| |__|   \___  >  |__|  |___|  /|__|    \___  >(____  /|__|    \___  >/ ____| |___  / \___  >|__|    |__||___|  /|__|   \___  >|____/
-        \/                       \/              \/             \/      \/             \/ \/          \/      \/                  \/            \/                                                                                                                            \______/                                                                           
-" -ForegroundColor green
+        \/                       \/              \/             \/      \/             \/ \/          \/      \/                  \/            \/                                                                                                                                       
+" -ForegroundColor yellow
+
+
+
+#Automated News reader edit $urlstrings to put in your own sources
+$outputFile = "C:\output.txt"
+
+
 $urlString = @(
 "https://www.cisa.gov/uscert/ncas/alerts.xml",
 "https://feeds.feedburner.com/TheHackersNews",
@@ -116,7 +123,7 @@ $urlString = @(
 'https://sensepost.com/rss.xm',
 'https://www.youtube.com/feeds/videos.xml?playlist_id=UU9Qa_gXarSmObPX3ooIQZrg',
 'https://www.reddit.com/r/netsec/.rss',
-'https://advisories.ncsc.nl/rss/advisories'
+'https://advisories.ncsc.nl/rss/advisories',
 'https://feeds.ncsc.nl/nieuws.rss',
 'https://research.checkpoint.com/category/threat-research/feed/',
 'https://securityintelligence.com/category/x-force/feed/',
@@ -127,7 +134,8 @@ $urlString = @(
 'https://www.securonix.com/resource-type/threat-research/feed/',
 'https://www.recordedfuture.com/category/cyber/feed/',
 'https://www.mcafee.com/blogs/tag/advanced-threat-research/feed',
-'https://blog.paloaltonetworks.com/category/threat-research/feed/'
+'https://blog.paloaltonetworks.com/category/threat-research/feed/',
+'https://www.kaspersky.co.in/blog/tag/threat-intelligence/feed/'
 )
 
 $displayedTitles = @()
@@ -206,14 +214,32 @@ foreach ($item in $allItems) {
         Write-Host ""
         Write-Host "Source: $link
                    
-        ``"
+        "
         $displayedTitles += $title
         $counter++
 
         #edit here how quickly
-        Start-Sleep -Seconds 5
-        clear
+        Start-Sleep -Seconds 3
     }
-}
 clear
-Stop-Transcript}
+Write-Host "
+
+
+
+
+
+
+___________.__   .__   __              __   .__                             __                   ___.                    .__          __           .__   
+\_   _____/|  |  |__|_/  |_   ____   _/  |_ |  |__ _______   ____  _____  _/  |_    ____  ___.__.\_ |__    ____ _______  |__|  ____ _/  |_   ____  |  |  
+ |    __)_ |  |  |  |\   __\_/ __ \  \   __\|  |  \\_  __ \_/ __ \ \__  \ \   __\ _/ ___\<   |  | | __ \ _/ __ \\_  __ \ |  | /    \\   __\_/ __ \ |  |  
+ |        \|  |__|  | |  |  \  ___/   |  |  |   Y  \|  | \/\  ___/  / __ \_|  |   \  \___ \___  | | \_\ \\  ___/ |  | \/ |  ||   |  \|  |  \  ___/ |  |__
+/_______  /|____/|__| |__|   \___  >  |__|  |___|  /|__|    \___  >(____  /|__|    \___  >/ ____| |___  / \___  >|__|    |__||___|  /|__|   \___  >|____/
+        \/                       \/              \/             \/      \/             \/ \/          \/      \/                  \/            \/                                                                                                                            \______/                                                                           
+" -ForegroundColor green
+
+
+}
+
+
+}
+stop-transcript
