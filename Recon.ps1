@@ -21,7 +21,7 @@ $outputFile = "C:\output.txt"
 $urlString = @(
 "https://www.cisa.gov/uscert/ncas/alerts.xml",
 "https://feeds.feedburner.com/TheHackersNews",
-"https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed"
+"https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed",
 "https://www.bleepingcomputer.com/feed/",
 "https://gbhackers.com/feed/",
 'https://grahamcluley.com/feed/',
